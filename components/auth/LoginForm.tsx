@@ -53,7 +53,7 @@ export default function LoginForm() {
       </div>
 
       <Button
-        className="h-12 w-full rounded-xl bg-[#2E5E3B] text-white hover:bg-[#24492e]"
+        className="h-12 w-full rounded-xl bg-[#2E5E3B] text-white transition-all duration-300 hover:bg-[#24492e] hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
       >
         Inloggen
       </Button>
