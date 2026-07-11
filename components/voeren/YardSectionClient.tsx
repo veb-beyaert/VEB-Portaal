@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
 type Box = {
+  id: number;
   number: number;
   horse: string;
 };
@@ -10,21 +9,17 @@ type Box = {
 type YardSectionClientProps = {
   title: string;
   boxes: Box[];
+  fedBoxes: number[];
+  onToggleBox: (boxNumber: number) => void;
 };
 
 export default function YardSectionClient({
   title,
   boxes,
+  fedBoxes,
+  onToggleBox
 }: YardSectionClientProps) {
-  const [fedBoxes, setFedBoxes] = useState<number[]>([]);
 
-  function toggleBox(boxNumber: number) {
-    setFedBoxes((current) =>
-      current.includes(boxNumber)
-        ? current.filter((n) => n !== boxNumber)
-        : [...current, boxNumber]
-    );
-  }
 
   const fedCount = fedBoxes.length;
   const progress =
@@ -62,12 +57,12 @@ export default function YardSectionClient({
 
         {boxes.map((box) => {
 
-          const fed = fedBoxes.includes(box.number);
+          const fed = fedBoxes.includes(box.id);
 
           return (
             <button
               key={box.number}
-              onClick={() => toggleBox(box.number)}
+              onClick={() => onToggleBox(box.id)}
               className={`flex w-full items-center justify-between rounded-xl border p-4 transition-all ${
                 fed
                   ? "border-green-300 bg-green-50"
